@@ -299,6 +299,12 @@ def main():
                     "\n/clearpoll group"
         reply_markup = InlineKeyboardMarkup(buttons)
         update.message.reply_text(text=out, reply_markup=reply_markup)
+		
+	def rsvp(bot, update, args):
+		group = args.pop(0)
+		name = " ".join(args)
+		if admin(bot, update, group):
+		
 
     def select_poll(bot,update):
         if admin(bot, update, group):
@@ -306,8 +312,7 @@ def main():
             bot.sendMessage(chat_id=update.message.chat_id, text="Please select a poll", reply_markup=reply_markup)
 
     def addselection(bot, update, args):
-        group = args[0]
-        del args[0]
+        group = args.pop(0)
         selection = " ".join(args)
         if admin(bot, update, group):
             poll = chats.chatcontainer.get_poll(group)
@@ -405,6 +410,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CommandHandler('hello', hello))
     updater.dispatcher.add_handler(CommandHandler('msanthro', msanthro, pass_args=True))
+	updater.dispatcher.add_handler(CommandHandler('rsvp', rsvp, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('poll', poll))
     updater.dispatcher.add_handler(CommandHandler('newpoll', newpoll, pass_args=True))
     updater.dispatcher.add_handler(CommandHandler('addselection', addselection, pass_args=True))

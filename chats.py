@@ -67,10 +67,14 @@ class chat:
         self.chat_id = chat_id
         self.admins = []
         self.poll = None
+		self.event = None
+		
     def admin(self, user_id):
         self.admins.append(user_id)
         return 0
 
+	def event_add(self, name)
+		self.event = Name
     def delete_poll(self):
         self.poll = None
 
